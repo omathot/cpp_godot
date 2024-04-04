@@ -6,7 +6,6 @@ REMOVE	:= srcs/*.os
 SRC		:= src/*.cpp
 CMP		:= scons
 OS 		:= $(shell uname -m)
-GD_PATH	= poop
 PLATFORM = placeholder
 _SUCCESS := "\033[32m[%s]\033[0m %s\n" # Green text for "printf"
 _ERROR := "\033[31m[%s]\033[0m %s\n" # Red text for "printf"
@@ -18,8 +17,8 @@ ans		= prout
 
 ifeq ($(OS), arm64)
 	PLATFORM = macos
-	GD_PATH = ~/../../Applications/Godot_mono.app/Contents/MacOS/Godot
 else ifeq ($(OS), x86_64)
+	kitty --detach -e godot4-mono -e --path /home/samuel/constuction/godot_game/demo/
 	PLATFORM = linux
 endif
 
@@ -50,22 +49,28 @@ all	: $(NAME)
 
 $(NAME) : 
 		scons platform=$(PLATFORM)
-		open -a iTerm -n test.sh
+ifeq ($(PLATFORM), macos)
+	open -a iTerm . test.sh
+else ifeq ($(OS), x86_64)
+		kitty --detach -e godot4-mono -e --path /home/samuel/constuction/godot_game/demo/
+endif
 
 redo :
-		@echo -n "Are you sure? [Y/n] " && read ans && if [ $${ans:-'Y'} = 'n' ]; then \
-       		printf $(_ERROR) "KO" "Stopping" ; \
-        	exit 1 ; \
-    	else \
-        	printf $(_SUCCESS) "OK" "Continuing" ; \
-        	exit 0; \
-    	fi
-		killall Godot
-		scons platform=$(PLATFORM)
-		open -a iTerm -n test.sh
 
-#./Godot -e --path /Users/oscarmathot/Construction/gdextension_cpp_example/demo/
-
+	@echo -n "Are you sure? [Y/n] " && read ans && if [ $${ans:-'Y'} = 'n' ]; then \
+		printf $(_ERROR) "KO" "Stopping" ; \
+		exit 1 ; \
+	else \
+		printf $(_SUCCESS) "OK" "Continuing" ; \
+		exit 0; \
+	fi
+	killall Godot
+	scons platform=$(PLATFORM)
+ifeq ($(PLATFORM), macos)
+	open -a iTerm . test.sh
+else ifeq ($(OS), x86_64)
+	kitty --detach -e godot4-mono -e --path /home/samuel/constuction/godot_game/demo/
+endif
 
 clean :
 		@rm -f $(REMOVE)

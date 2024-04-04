@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://hs374kvu5j4x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5hl5t"]
+radius = 358.43
+height = 3416.37
+
+[node name="Lane Node" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = -1
+position = Vector2(1563, 2187)
+rotation = 2.39285
+shape = SubResource("CapsuleShape2D_5hl5t")
