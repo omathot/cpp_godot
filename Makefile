@@ -48,7 +48,7 @@ all	: $(NAME)
 		
 
 $(NAME) : 
-		scons platform=$(PLATFORM)
+		$(CMP) platform=$(PLATFORM)
 ifeq ($(PLATFORM), macos)
 	open -a iTerm . test.sh
 else ifeq ($(OS), x86_64)
@@ -65,7 +65,7 @@ redo :
 		exit 0; \
 	fi
 	killall Godot
-	scons platform=$(PLATFORM)
+	$(CMP) platform=$(PLATFORM)
 ifeq ($(PLATFORM), macos)
 	open -a iTerm . test.sh
 else ifeq ($(OS), x86_64)
@@ -73,7 +73,12 @@ else ifeq ($(OS), x86_64)
 endif
 
 clean :
-		@rm -f $(REMOVE)
+# @rm -f $(REMOVE)
+		@rm -f src/player_files/*.os
+		@rm -f src/weapon_files/*.os
+		@rm -f src/enemy_files/*.os
+		@rm -f src/items_files/*.os
+		@rm -f src/*.os
 		@echo "$(GREEN)Cleaned up the artifacts !$(RESET)"
 
 fclean :
