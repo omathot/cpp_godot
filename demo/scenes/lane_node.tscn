@@ -1,13 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://hs374kvu5j4x"]
+[gd_scene load_steps=3 format=3 uid="uid://hs374kvu5j4x"]
+
+[ext_resource type="Texture2D" uid="uid://chjuox4hf07qt" path="res://textures/bigrocks.jpg" id="1_nherj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5hl5t"]
 radius = 358.43
 height = 3416.37
 
 [node name="Lane Node" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = -1
 position = Vector2(1563, 2187)
 rotation = 2.39285
 shape = SubResource("CapsuleShape2D_5hl5t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1561.19, 2193.88)
+rotation = -0.734876
+scale = Vector2(1.00662, 8.37064)
+texture = ExtResource("1_nherj")

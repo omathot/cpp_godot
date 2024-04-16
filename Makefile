@@ -18,7 +18,6 @@ ans		= prout
 ifeq ($(OS), arm64)
 	PLATFORM = macos
 else ifeq ($(OS), x86_64)
-	kitty --detach -e godot4-mono -e --path /home/samuel/constuction/godot_game/demo/
 	PLATFORM = linux
 endif
 

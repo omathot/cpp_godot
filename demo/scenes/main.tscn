@@ -1,11 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://bo0tqpg37s2vp"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_vga6v"]
 [ext_resource type="Texture2D" uid="uid://4ofibr7j741a" path="res://textures/grassy_plain.png" id="3_srogf"]
 [ext_resource type="PackedScene" uid="uid://hs374kvu5j4x" path="res://scenes/lane_node.tscn" id="4_41mcj"]
 [ext_resource type="Texture2D" uid="uid://be6x3376moy71" path="res://textures/green.jpg" id="4_i4esr"]
-[ext_resource type="Script" path="res://scripts/Camera2D.gd" id="5_7h3nc"]
 [ext_resource type="Texture2D" uid="uid://kajgq2jcxwr" path="res://textures/icon.svg" id="5_jrm2c"]
+[ext_resource type="PackedScene" uid="uid://d1vngpcwrudmv" path="res://scenes/grandma.tscn" id="5_pm7tc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0qcux"]
 size = Vector2(1505.5, 1244)
@@ -14,13 +13,17 @@ size = Vector2(1505.5, 1244)
 size = Vector2(15661.5, 11063.5)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ggtjs"]
-radius = 76.0
-height = 212.0
+radius = 23.723
+height = 67.7588
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q8gul"]
+size = Vector2(46, 47)
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_vga6v")
 
 [node name="Spawn Node" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 8
 
 [node name="Spawn collision" type="CollisionShape2D" parent="Spawn Node"]
 z_index = -1
@@ -32,13 +35,10 @@ scale = Vector2(0.738281, 0.60791)
 texture = ExtResource("3_srogf")
 centered = false
 
-[node name="Lane Node" parent="." instance=ExtResource("4_41mcj")]
-
-[node name="Lane Node2" parent="." instance=ExtResource("4_41mcj")]
-position = Vector2(780, -740)
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(10000, 7500)
+collision_layer = 8
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 z_index = -1
@@ -48,17 +48,33 @@ shape = SubResource("RectangleShape2D_e8chq")
 scale = Vector2(5.48, 6.2)
 texture = ExtResource("4_i4esr")
 
-[node name="Shakable" type="Node2D" parent="."]
+[node name="Lane Node" parent="." instance=ExtResource("4_41mcj")]
 
-[node name="Camera2D" type="Camera2D" parent="Shakable"]
-script = ExtResource("5_7h3nc")
+[node name="Lane Node2" parent="." instance=ExtResource("4_41mcj")]
+position = Vector2(780, -740)
 
-[node name="Character" type="Character" parent="."]
-position = Vector2(3024, 2985)
+[node name="Character" type="Character" parent="." groups=["Friendly"]]
+position = Vector2(290, 502)
+velocity = Vector2(-342.455, -206.699)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
 scale = Vector2(0.927371, 1.00356)
 shape = SubResource("CapsuleShape2D_ggtjs")
 
 [node name="Sprite2D" type="Sprite2D" parent="Character"]
+texture_filter = 1
+scale = Vector2(0.320312, 0.320312)
 texture = ExtResource("5_jrm2c")
+
+[node name="Area2D" type="Area2D" parent="Character"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character/Area2D"]
+shape = SubResource("RectangleShape2D_q8gul")
+
+[node name="Camera2D" type="Camera2D" parent="Character"]
+zoom = Vector2(0.5, 0.5)
+
+[node name="Spawner" type="Spawner" parent="."]
+
+[node name="Grandma" parent="." instance=ExtResource("5_pm7tc")]
+position = Vector2(614, 661)
