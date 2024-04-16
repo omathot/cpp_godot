@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1vngpcwrudmv"]
+
+[ext_resource type="Texture2D" uid="uid://kajgq2jcxwr" path="res://textures/icon.svg" id="1_3uew8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ryrsj"]
+radius = 5.0
+height = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0w7j"]
+size = Vector2(10, 14)
+
+[node name="Grandma" type="Grandma" groups=["enemies"]]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ryrsj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.144531, 0.214844)
+texture = ExtResource("1_3uew8")
+
+[node name="gArea2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gArea2D"]
+shape = SubResource("RectangleShape2D_k0w7j")

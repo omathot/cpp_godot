@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cabkntqbmlujl"]
+
+[ext_resource type="PackedScene" uid="uid://d1vngpcwrudmv" path="res://scenes/grandma.tscn" id="1_tkf45"]
+[ext_resource type="Texture2D" uid="uid://dw3h5143uhbj8" path="res://textures/Zombie Pixel Design.jpg" id="2_kyerf"]
+
+[node name="Grandma" instance=ExtResource("1_tkf45")]
+
+[node name="Sprite2D" parent="." index="1"]
+texture_filter = 1
+scale = Vector2(0.0144473, 0.0200179)
+texture = ExtResource("2_kyerf")

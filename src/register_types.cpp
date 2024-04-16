@@ -1,6 +1,9 @@
 #include "register_types.h"
 #include "player_files/Character.h"
 #include "enemy_files/Grandma.h"
+#include "gamesys_files/Spawner.h"
+#include "weapon_files/projectiles/Bullet.h"
+// #include "enemy_files/Stat.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -14,9 +17,13 @@ void init_character_extension(ModuleInitializationLevel p_level) {
 	}
 
 	ClassDB::register_class<Character>();
+	ClassDB::register_class<Grandma>();
+	ClassDB::register_class<Stat>();
+	ClassDB::register_class<Spawner>();
+	ClassDB::register_class<Bullet>();
+	// ClassDB::register_class<AItems>();
 	// ClassDB::register_abstract_class<IMob>();
 	// ClassDB::register_class<IMob>();
-	// ClassDB::register_class<Grandma>();
 }
 
 void uninit_character_extension(ModuleInitializationLevel p_level) {
